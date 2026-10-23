@@ -1,0 +1,8 @@
+*.cer
+*.key
+*.pem
+*.xml
+*.pdf
+.env
+node_modules/
+secretos/
