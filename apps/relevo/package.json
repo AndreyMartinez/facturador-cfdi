@@ -1,0 +1,16 @@
+{
+  "name": "@facturador/relevo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Relevo sin estado en Cloudflare Workers: habla con el PAC y con MercadoLibre. Nunca recibe el CSD.",
+  "license": "AGPL-3.0-only",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@facturador/pac": "*"
+  }
+}

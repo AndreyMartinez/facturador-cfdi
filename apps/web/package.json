@@ -1,0 +1,27 @@
+{
+  "name": "@facturador/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sitio estático (GitHub Pages): toda la facturación ocurre en el navegador.",
+  "license": "AGPL-3.0-only",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@facturador/almacen": "*",
+    "@facturador/firmador-webcrypto": "*",
+    "@facturador/fuentes": "*",
+    "@facturador/nucleo": "*",
+    "@facturador/pac": "*",
+    "@facturador/pdf": "*",
+    "fflate": "0.8.2",
+    "htm": "3.1.1",
+    "preact": "10.29.8"
+  },
+  "devDependencies": {
+    "vite": "8.3.4"
+  }
+}

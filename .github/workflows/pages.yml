@@ -1,0 +1,53 @@
+# Publica la demo en GitHub Pages. Para mudarse de hosting basta con cambiar este job:
+# el build es el mismo (base relativa y rutas por hash).
+name: Publicar demo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/facturador
+          key: fixtures-${{ hashFiles('scripts/fixtures.js') }}
+      - run: npm ci
+      - run: npm run fixtures
+      - run: npm run secretos
+      - name: Build
+        run: npm run build -w @facturador/web
+        env:
+          # Variable del repositorio. Vacía = la demo usa el PAC simulado.
+          VITE_RELEVO_URL: ${{ vars.RELEVO_URL }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: apps/web/dist
+
+  desplegar:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

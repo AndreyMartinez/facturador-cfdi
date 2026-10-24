@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockups facturador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6fb; --panel:#ffffff; --panel-2:#f8fafc; --ink:#0f172a; --muted:#64748b; --line:#e5e9f2;
+  --side:#0b1220; --side-ink:#cbd5e1; --side-muted:#64748b; --side-hi:#1e293b;
+  --brand:#4f46e5; --brand-2:#7c3aed; --brand-ink:#ffffff; --brand-soft:#eef2ff;
+  --ok:#059669; --ok-soft:#ecfdf5; --warn:#b45309; --warn-soft:#fffbeb; --bad:#dc2626; --bad-soft:#fef2f2;
+  --sb:#0369a1; --sb-soft:#e0f2fe;
+  --shadow:0 1px 2px rgba(15,23,42,.04),0 4px 16px rgba(15,23,42,.06);
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a0f1a; --panel:#111827; --panel-2:#0f1623; --ink:#e5e7eb; --muted:#94a3b8; --line:#1f2937;
+    --side:#060a13; --side-hi:#162033;
+    --brand:#818cf8; --brand-2:#a78bfa; --brand-ink:#0b1020; --brand-soft:#1e1b4b;
+    --ok:#34d399; --ok-soft:#052e24; --warn:#fbbf24; --warn-soft:#2d1f05; --bad:#f87171; --bad-soft:#2d0f0f;
+    --sb:#38bdf8; --sb-soft:#082f49; --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a0f1a; --panel:#111827; --panel-2:#0f1623; --ink:#e5e7eb; --muted:#94a3b8; --line:#1f2937;
+  --side:#060a13; --side-hi:#162033;
+  --brand:#818cf8; --brand-2:#a78bfa; --brand-ink:#0b1020; --brand-soft:#1e1b4b;
+  --ok:#34d399; --ok-soft:#052e24; --warn:#fbbf24; --warn-soft:#2d1f05; --bad:#f87171; --bad-soft:#2d0f0f;
+  --sb:#38bdf8; --sb-soft:#082f49; --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--brand);text-decoration:none}
+.mono{font-family:var(--mono);font-size:12.5px}
+td.mono{white-space:nowrap}
+.muted{color:var(--muted)}
+/* guía */
+.guide{max-width:1180px;margin:0 auto;padding:32px 16px 0}
+.guide .eyebrow{font-size:12px;font-weight:600;color:var(--brand);text-transform:uppercase;letter-spacing:.08em}
+.guide h1{font-size:28px;letter-spacing:-.6px;margin:6px 0}
+.guide p{margin:0;color:var(--muted);max-width:720px}
+.toc{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-top:20px}
+.toc div{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;gap:6px;overflow-x:auto}
+.toc a{white-space:nowrap;font-size:12.5px;font-weight:500;color:var(--muted);padding:6px 11px;border-radius:8px;border:1px solid var(--line);background:var(--panel)}
+.toc a:hover{color:var(--ink)}
+.screen{max-width:1180px;margin:36px auto 0;padding:0 16px;scroll-margin-top:64px}
+.screen-head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.screen-head b{font-size:12px;color:var(--brand);background:var(--brand-soft);padding:2px 8px;border-radius:6px}
+.screen-head h2{font-size:17px;margin:0}
+.screen-head span{color:var(--muted);font-size:13px}
+/* marco */
+.frame{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 50px -20px rgba(15,23,42,.25);background:var(--panel)}
+.chrome{display:flex;align-items:center;gap:6px;padding:9px 14px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.chrome i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.chrome span{margin-left:10px;font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:2px 10px}
+/* shell */
+.shell{display:grid;grid-template-columns:232px 1fr;min-height:620px}
+.side{background:var(--side);color:var(--side-ink);padding:18px 12px;display:flex;flex-direction:column;gap:4px}
+.brandmark{display:flex;align-items:center;gap:10px;padding:4px 8px 18px;font-weight:700;font-size:16px;color:#fff;letter-spacing:-.3px}
+.brandmark i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#6366f1,#a855f7);display:grid;place-items:center;font-style:normal;font-size:14px}
+.nav-l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--side-muted);padding:12px 10px 4px}
+.nav{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;color:var(--side-ink);font-size:13.5px;font-weight:500}
+.nav svg{width:16px;height:16px;opacity:.75}
+.nav.on{background:var(--side-hi);color:#fff}
+.nav .ct{margin-left:auto;font-size:11px;background:#334155;color:#e2e8f0;border-radius:999px;padding:0 7px}
+.side .sp{flex:1}
+.org{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:var(--side-hi);font-size:12.5px}
+.org .av{width:30px;height:30px;border-radius:8px;background:#334155;display:grid;place-items:center;font-weight:700;color:#fff;font-size:12px}
+.org small{display:block;color:var(--side-muted);font-family:var(--mono);font-size:11px}
+.main{display:flex;flex-direction:column;min-width:0;background:var(--bg)}
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 24px;background:var(--panel);border-bottom:1px solid var(--line)}
+.crumb{font-size:13px;color:var(--muted)} .crumb b{color:var(--ink);font-weight:600}
+.topbar .sp{flex:1}
+.searchbox{display:flex;align-items:center;gap:8px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:6px 10px;color:var(--muted);font-size:13px;min-width:200px}
+.searchbox kbd{margin-left:auto;font:11px var(--mono);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+.env{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--sb-soft);color:var(--sb)}
+.env::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.env.prod{background:var(--bad-soft);color:var(--bad)}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px}
+.content{padding:24px;display:flex;flex-direction:column;gap:18px}
+.ph{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.ph h3{font-size:22px;letter-spacing:-.4px;margin:0}
+.ph p{margin:2px 0 0;color:var(--muted)}
+/* piezas */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+.card-h{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line)}
+.card-h h4{margin:0;font-size:13.5px;font-weight:600}
+.card-b{padding:16px 18px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.split{display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
+dl{display:grid;grid-template-columns:120px 1fr;gap:8px 12px;margin:0;font-size:13.5px}
+dt{color:var(--muted)} dd{margin:0;font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:9px 15px;border-radius:9px;font:inherit;font-weight:600;font-size:13.5px;cursor:pointer;box-shadow:0 1px 2px rgba(15,23,42,.05)}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:var(--brand-ink);box-shadow:0 4px 14px -4px color-mix(in srgb,var(--brand) 60%,transparent)}
+.btn.danger{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn.ghost{background:transparent;box-shadow:none}
+.btn.sm{padding:5px 10px;font-size:12.5px}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--panel-2);color:var(--muted);border:1px solid var(--line);white-space:nowrap}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.badge.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.badge.sb{background:var(--sb-soft);color:var(--sb);border-color:transparent}
+.badge.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;text-align:left;padding:10px 18px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+td{padding:12px 18px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+.n{text-align:right;font-variant-numeric:tabular-nums}
+.kpi .card-b{display:flex;flex-direction:column;gap:4px}
+.kpi small{color:var(--muted);font-weight:500}
+.kpi strong{font-size:26px;letter-spacing:-.6px}
+.kpi .delta{font-size:12px;color:var(--ok);font-weight:600}
+.bars{display:flex;align-items:flex-end;gap:4px;height:34px;margin-top:6px}
+.bars i{flex:1;background:var(--brand-soft);border-radius:3px}
+.bars i.hi{background:var(--brand)}
+.field{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink)}
+.field input,.field select{font:inherit;font-weight:400;font-size:13.5px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+.field input:focus{outline:2px solid var(--brand);outline-offset:-1px}
+.seg{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:3px}
+.seg span{padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;color:var(--muted)}
+.seg span.on{background:var(--panel);color:var(--ink);box-shadow:var(--shadow)}
+.stepper{display:flex;gap:0;align-items:center}
+.st{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--muted)}
+.st b{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;border:1.5px solid var(--line);background:var(--panel)}
+.st.done b{background:var(--ok);border-color:var(--ok);color:#fff}
+.st.cur{color:var(--ink)} .st.cur b{border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 4px var(--brand-soft)}
+.st-line{width:40px;height:2px;background:var(--line);margin:0 10px}
+.st-line.done{background:var(--ok)}
+.sum{display:flex;flex-direction:column;gap:8px;font-size:13.5px}
+.sum div{display:flex;justify-content:space-between}
+.sum .tot{border-top:1px dashed var(--line);padding-top:12px;margin-top:4px;font-size:22px;font-weight:700;letter-spacing:-.4px}
+.callout{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:10px;font-size:13px}
+.callout.ok{background:var(--ok-soft);color:var(--ok)}
+.callout.warn{background:var(--warn-soft);color:var(--warn)}
+.callout.bad{background:var(--bad-soft);color:var(--bad)}
+.callout.sb{background:var(--sb-soft);color:var(--sb)}
+.callout .ic{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:currentColor}
+.callout .ic::after{color:var(--panel);font-size:12px;font-weight:800}
+.callout.ok .ic::after{content:"✓"} .callout.warn .ic::after,.callout.sb .ic::after{content:"!"} .callout.bad .ic::after{content:"✕"}
+.callout p{margin:0;color:var(--ink)} .callout p b{color:inherit}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl{display:flex;gap:12px;position:relative;padding-bottom:16px}
+.tl:not(:last-child)::before{content:"";position:absolute;left:11px;top:24px;bottom:0;width:2px;background:var(--line)}
+.tl b{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--ok);color:#fff}
+.tl.pend b{background:var(--panel-2);color:var(--muted);border:1.5px solid var(--line)}
+.tl div small{display:block;color:var(--muted)}
+.code{font-family:var(--mono);font-size:12px;line-height:1.6;background:#0b1220;color:#cbd5e1;border-radius:10px;padding:14px;overflow:auto;white-space:pre;margin:0}
+.code .k{color:#93c5fd}.code .a{color:#c4b5fd}.code .s{color:#86efac}
+.pdf{background:#fff;color:#1e293b;border-radius:10px;border:1px solid var(--line);padding:18px;font-size:11.5px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.pdf .wm{position:absolute;inset:0;display:grid;place-items:center;transform:rotate(-20deg);font-size:28px;font-weight:800;color:rgba(3,105,161,.12);pointer-events:none}
+.pdf .hd{display:flex;justify-content:space-between;border-bottom:2px solid #4f46e5;padding-bottom:10px;margin-bottom:10px}
+.pdf .qr{width:72px;height:72px;background:repeating-conic-gradient(#0f172a 0 25%,#fff 0 50%) 0 0/12px 12px;border:4px solid #fff;outline:1px solid #e2e8f0}
+.pdf table td,.pdf table th{padding:5px 0;background:none;font-size:11px}
+.drop{border:1.5px dashed color-mix(in srgb,var(--brand) 45%,var(--line));background:var(--brand-soft);border-radius:12px;padding:22px;text-align:center;color:var(--muted);font-size:13px}
+.drop strong{display:block;color:var(--ink);font-size:14px;margin-bottom:2px}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.toggle:last-child{border-bottom:0}
+.sw{width:36px;height:20px;border-radius:999px;background:var(--brand);position:relative;flex:none}
+.sw::after{content:"";position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+.sw.off{background:var(--line)} .sw.off::after{right:auto;left:2px}
+/* portada */
+.land{background:var(--panel)}
+.land-nav{display:flex;align-items:center;gap:22px;padding:16px 32px;border-bottom:1px solid var(--line)}
+.land-nav .brandmark{color:var(--ink);padding:0}
+.land-nav a{color:var(--muted);font-weight:500;font-size:13.5px}
+.land-nav .sp{flex:1}
+.hero{position:relative;padding:56px 32px 40px;display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-40% -10% auto auto;width:640px;height:640px;background:radial-gradient(closest-side,color-mix(in srgb,var(--brand) 22%,transparent),transparent);pointer-events:none}
+.pill-top{display:inline-flex;gap:8px;align-items:center;font-size:12.5px;font-weight:600;color:var(--brand);background:var(--brand-soft);border-radius:999px;padding:4px 12px}
+.hero h1{font-size:44px;line-height:1.08;letter-spacing:-1.4px;margin:16px 0 14px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:16px;color:var(--muted);margin:0 0 24px;max-width:480px}
+.hero .ctas{display:flex;gap:10px;flex-wrap:wrap}
+.trust{display:flex;gap:22px;margin-top:28px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.trust span::before{content:"✓ ";color:var(--ok);font-weight:700}
+.demo-card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 60px -25px rgba(79,70,229,.35);padding:18px}
+.price{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 32px 40px}
+.price .card-b strong{font-size:24px;letter-spacing:-.5px;display:block}
+.modal-wrap{background:rgba(15,23,42,.45);backdrop-filter:blur(2px);display:grid;place-items:center;padding:60px 16px;min-height:520px}
+.modal{background:var(--panel);border-radius:16px;max-width:460px;width:100%;box-shadow:0 30px 60px -20px rgba(0,0,0,.45);overflow:hidden}
+.modal .mh{padding:20px 22px 0}
+.modal .mb{padding:16px 22px}
+.modal .mf{display:flex;gap:10px;justify-content:flex-end;padding:14px 22px;background:var(--panel-2);border-top:1px solid var(--line)}
+/* teléfono */
+.phone{width:375px;max-width:100%;margin:0 auto;border-radius:40px;border:10px solid #0f172a;overflow:hidden;background:var(--bg);box-shadow:0 30px 60px -25px rgba(15,23,42,.5)}
+.phone .pt{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+.phone .pc{padding:16px;display:flex;flex-direction:column;gap:12px;min-height:520px}
+.phone .pb{display:flex;justify-content:space-around;padding:10px 0 16px;background:var(--panel);border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+.phone .pb span{display:flex;flex-direction:column;align-items:center;gap:2px}
+.phone .pb span.on{color:var(--brand);font-weight:600}
+footer{max-width:1180px;margin:40px auto;padding:0 16px;color:var(--muted);font-size:12.5px}
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .side{display:none}
+  .g2,.g3,.g4,.split,.hero,.price{grid-template-columns:1fr}
+  .hero h1{font-size:32px}
+  .searchbox,.hide-m{display:none}
+  .content,.topbar{padding-left:16px;padding-right:16px}
+  .hero,.land-nav,.price{padding-left:16px;padding-right:16px}
+  .land-nav a{display:none}
+  td,th{padding-left:12px;padding-right:12px}
+}
+</style>
+</head>
+<body>
+
+<header class="guide">
+  <div class="eyebrow">Spec · plataforma low cost · Fase A</div>
+  <h1>Mockups del facturador</h1>
+  <p>Demo pública en sandbox con la misma estructura de la plataforma: menú lateral, varios emisores y métricas de timbres. Los datos son de prueba del SAT; la factura de ejemplo es la de referencia de $198.00.</p>
+</header>
+
+<nav class="toc"><div>
+  <a href="#s1">1 · Portada</a><a href="#s2">2 · Panel</a><a href="#s3">3 · Nueva factura</a><a href="#s4">4 · Revisar</a>
+  <a href="#s5">5 · Confirmar producción</a><a href="#s6">6 · Factura lista</a><a href="#s7">7 · Emitidas</a>
+  <a href="#s8">8 · Emisor y CSD</a><a href="#s9">9 · Errores</a><a href="#s10">10 · Teléfono</a>
+</div></nav>
+
+<!-- ============ 1 PORTADA ============ -->
+<section class="screen" id="s1">
+  <div class="screen-head"><b>1</b><h2>Portada de la demo</h2><span>GitHub Pages · sin cuenta · Requisito 0</span></div>
+  <div class="frame">
+    <div class="chrome"><i></i><i></i><i></i><span>andreymartinez.github.io/facturador-cfdi</span></div>
+    <div class="land">
+      <div class="land-nav">
+        <div class="brandmark"><i>F</i>Facturalow</div>
+        <a href="#">Producto</a><a href="#">Precios</a><a href="#">Seguridad</a><a href="#">Desarrolladores</a>
+        <span class="sp"></span><span class="env">Sandbox</span><button class="btn pri sm">Probar la demo</button>
+      </div>
+      <div class="hero">
+        <div>
+          <span class="pill-top">CFDI 4.0 · Timbrado directo con PAC</span>
+          <h1>Factura tus ventas pagando <em>solo el timbre.</em></h1>
+          <p class="lead">Conecta MercadoLibre, revisa y timbra en segundos. El sellado ocurre en tu navegador: tu CSD nunca sale de tu equipo.</p>
+          <div class="ctas"><button class="btn pri">Generar una factura de prueba →</button><button class="btn">Ver cómo funciona</button></div>
+          <div class="trust"><span>$0 al mes</span><span>CSD solo en tu equipo</span><span>Cuadra al centavo con ML</span></div>
+        </div>
+        <div class="demo-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><strong>Venta …3210</strong><span class="badge sb">Sandbox</span></div>
+          <div class="timeline">
+            <div class="tl"><b>✓</b><div>Venta leída<small>Organizador de cubiertos · $198.00</small></div></div>
+            <div class="tl"><b>✓</b><div>Borrador cuadrado al centavo<small>Unitario 170.689655 · IVA 27.31</small></div></div>
+            <div class="tl"><b>✓</b><div>XML sellado en el navegador<small>RSA-SHA256 · CSD de prueba del SAT</small></div></div>
+            <div class="tl"><b>✓</b><div>Timbrado por el PAC<small class="mono">UUID 6F1C2A3B-9D4E-4F10…</small></div></div>
+            <div class="tl"><b>✓</b><div>PDF con QR del SAT<small>Listo para descargar</small></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="price">
+        <div class="card"><div class="card-b"><small class="muted">Infraestructura</small><strong>$0 / mes</strong><span class="muted">Sitio estático y relevo en capa gratuita.</span></div></div>
+        <div class="card"><div class="card-b"><small class="muted">Por factura</small><strong>Solo el timbre</strong><span class="muted">Pagas directo al PAC, sin sobreprecio.</span></div></div>
+        <div class="card"><div class="card-b"><small class="muted">Tus sellos</small><strong>Nunca se suben</strong><span class="muted">El CSD se usa solo en tu navegador.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 PANEL ============ -->
+<section class="screen" id="s2">
+  <div class="screen-head"><b>2</b><h2>Panel</h2><span>Ventas por facturar y consumo de timbres · Requisitos 3, 9.9</span></div>
+  <div class="frame"><div class="shell">
+    <aside class="side">
+      <div class="brandmark"><i>F</i>Facturalow</div>
+      <a class="nav on" href="#"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg>Panel</a>
+      <a class="nav" href="#"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 1h7l3 3v11H3z"/></svg>Nueva factura</a>
+      <a class="nav" href="#"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 3h12v2H2zM2 7h12v2H2zM2 11h12v2H2z"/></svg>Emitidas<span class="ct">14</span></a>
+      <a class="nav" href="#"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="5" r="3"/><path d="M2 15c0-3 3-5 6-5s6 2 6 5z"/></svg>Clientes</a>
+      <div class="nav-l">Integraciones</div>
+      <a class="nav" href="#"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="6"/></svg>MercadoLibre<span class="ct">3</span></a>
+      <a class="nav" href="#"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l6 3v4c0 4-3 6-6 7-3-1-6-3-6-7V4z"/></svg>PAC</a>
+      <div class="nav-l">Cuenta</div>
+      <a class="nav" href="#"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2 4 4 .5-3 3 1 4.5-4-2-4 2 1-4.5-3-3L6 5z"/></svg>Emisor y CSD</a>
+      <a class="nav" href="#"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="4" width="14" height="9" rx="2"/></svg>Timbres y plan</a>
+      <span class="sp"></span>
+      <div class="org"><span class="av">EK</span><div>Escuela Kemper Urgate<small>EKU9003173C9</small></div></div>
+    </aside>
+    <div class="main">
+      <div class="topbar"><span class="crumb"><b>Panel</b></span><span class="sp"></span><div class="searchbox">⌕ Buscar venta, RFC o folio<kbd>⌘K</kbd></div><span class="env">Sandbox</span><span class="avatar">RM</span></div>
+      <div class="content">
+        <div class="ph"><div><h3>Buenos días</h3><p>3 ventas de MercadoLibre esperan factura.</p></div><button class="btn pri">+ Nueva factura</button></div>
+        <div class="g4">
+          <div class="card kpi"><div class="card-b"><small>Facturado en octubre</small><strong>$2,814.30</strong><span class="delta">▲ 18% vs septiembre</span></div></div>
+          <div class="card kpi"><div class="card-b"><small>Facturas emitidas</small><strong>14</strong><div class="bars"><i style="height:30%"></i><i style="height:45%"></i><i style="height:35%"></i><i style="height:60%"></i><i style="height:50%"></i><i class="hi" style="height:90%"></i></div></div></div>
+          <div class="card kpi"><div class="card-b"><small>Timbres usados</small><strong>14 <span class="muted" style="font-size:14px;font-weight:500">sandbox</span></strong><small>0 en producción · $0.00</small></div></div>
+          <div class="card kpi"><div class="card-b"><small>Costo por factura</small><strong>$0.00</strong><small>solo timbre en producción</small></div></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h4>Ventas por facturar</h4><div class="seg"><span class="on">MercadoLibre</span><span>Manual</span></div></div>
+          <table>
+            <thead><tr><th>Venta</th><th class="hide-m">Fecha</th><th>Producto</th><th>Datos fiscales</th><th class="n">Total</th><th></th></tr></thead>
+            <tbody>
+              <tr><td class="mono">#…3210</td><td class="hide-m muted">18 oct</td><td>Organizador de cubiertos</td><td><span class="badge ok">RFC capturado</span></td><td class="n">$198.00</td><td class="n"><button class="btn sm pri">Facturar</button></td></tr>
+              <tr><td class="mono">#…7781</td><td class="hide-m muted">20 oct</td><td>Organizador de cubiertos</td><td><span class="badge warn">Público en general</span></td><td class="n">$188.10</td><td class="n"><button class="btn sm">Revisar</button></td></tr>
+              <tr><td class="mono">#…9902</td><td class="hide-m muted">22 oct</td><td>Escurridor + 2 tapas</td><td><span class="badge">Sin solicitud</span></td><td class="n">$356.00</td><td class="n"><button class="btn sm">Revisar</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 3 NUEVA FACTURA ============ -->
+<section class="screen" id="s3">
+  <div class="screen-head"><b>3</b><h2>Nueva factura · elegir origen</h2><span>Fuente de ventas intercambiable · Requisitos 3, 9.2</span></div>
+  <div class="frame"><div class="shell">
+    <aside class="side">
+      <div class="brandmark"><i>F</i>Facturalow</div>
+      <a class="nav" href="#">Panel</a><a class="nav on" href="#">Nueva factura</a><a class="nav" href="#">Emitidas<span class="ct">14</span></a><a class="nav" href="#">Clientes</a>
+      <div class="nav-l">Integraciones</div><a class="nav" href="#">MercadoLibre</a><a class="nav" href="#">PAC</a>
+      <div class="nav-l">Cuenta</div><a class="nav" href="#">Emisor y CSD</a><a class="nav" href="#">Timbres y plan</a>
+      <span class="sp"></span><div class="org"><span class="av">EK</span><div>Escuela Kemper Urgate<small>EKU9003173C9</small></div></div>
+    </aside>
+    <div class="main">
+      <div class="topbar"><span class="crumb">Facturas / <b>Nueva</b></span><span class="sp"></span><span class="env">Sandbox</span><span class="avatar">RM</span></div>
+      <div class="content">
+        <div class="stepper"><span class="st cur"><b>1</b>Origen</span><span class="st-line"></span><span class="st"><b>2</b>Revisar</span><span class="st-line"></span><span class="st"><b>3</b>Timbrar</span><span class="st-line"></span><span class="st"><b>4</b>Entregar</span></div>
+        <div class="ph"><div><h3>¿De dónde viene la venta?</h3><p>Elige una fuente. Puedes agregar más integraciones después.</p></div></div>
+        <div class="g3">
+          <div class="card" style="border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)"><div class="card-b">
+            <div style="display:flex;justify-content:space-between"><strong>MercadoLibre</strong><span class="badge ok">Conectado</span></div>
+            <p class="muted" style="margin:6px 0 14px">Trae la venta y los datos fiscales del comprador.</p>
+            <label class="field">Número de venta (pack u orden)<input value="2000009876543210"></label>
+            <button class="btn pri" style="width:100%;margin-top:12px">Buscar venta</button>
+          </div></div>
+          <div class="card"><div class="card-b">
+            <strong>Captura manual</strong>
+            <p class="muted" style="margin:6px 0 14px">Para ventas fuera de una plataforma.</p>
+            <button class="btn" style="width:100%">Capturar</button>
+          </div></div>
+          <div class="card"><div class="card-b">
+            <div style="display:flex;justify-content:space-between"><strong>Venta de ejemplo</strong><span class="badge sb">Demo</span></div>
+            <p class="muted" style="margin:6px 0 14px">Las dos facturas de referencia: $198.00 y $188.10.</p>
+            <button class="btn" style="width:100%">Usar ejemplo</button>
+          </div></div>
+        </div>
+        <div class="card"><div class="card-b muted" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">Próximamente: <span class="badge">Shopify</span><span class="badge">Amazon</span><span class="badge">CSV</span><span class="badge">API</span></div></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 4 REVISAR ============ -->
+<section class="screen" id="s4">
+  <div class="screen-head"><b>4</b><h2>Revisar borrador</h2><span>Editable antes de sellar; resumen fijo a la derecha · Requisitos 4, 10</span></div>
+  <div class="frame"><div class="shell">
+    <aside class="side">
+      <div class="brandmark"><i>F</i>Facturalow</div>
+      <a class="nav" href="#">Panel</a><a class="nav on" href="#">Nueva factura</a><a class="nav" href="#">Emitidas<span class="ct">14</span></a><a class="nav" href="#">Clientes</a>
+      <div class="nav-l">Integraciones</div><a class="nav" href="#">MercadoLibre</a><a class="nav" href="#">PAC</a>
+      <div class="nav-l">Cuenta</div><a class="nav" href="#">Emisor y CSD</a><a class="nav" href="#">Timbres y plan</a>
+      <span class="sp"></span><div class="org"><span class="av">EK</span><div>Escuela Kemper Urgate<small>EKU9003173C9</small></div></div>
+    </aside>
+    <div class="main">
+      <div class="topbar"><span class="crumb">Facturas / Nueva / <b>Venta #…3210</b></span><span class="sp"></span><span class="env">Sandbox</span><span class="avatar">RM</span></div>
+      <div class="content">
+        <div class="stepper"><span class="st done"><b>✓</b>Origen</span><span class="st-line done"></span><span class="st cur"><b>2</b>Revisar</span><span class="st-line"></span><span class="st"><b>3</b>Timbrar</span><span class="st-line"></span><span class="st"><b>4</b>Entregar</span></div>
+        <div class="split">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div class="g2">
+              <div class="card"><div class="card-h"><h4>Emisor</h4><span class="badge ok">CSD vigente</span></div><div class="card-b">
+                <dl><dt>RFC</dt><dd class="mono">EKU9003173C9</dd><dt>Nombre</dt><dd>ESCUELA KEMPER URGATE</dd><dt>Régimen</dt><dd>625 · Plataformas tecnológicas</dd><dt>Expedición</dt><dd class="mono">42501</dd></dl>
+              </div></div>
+              <div class="card"><div class="card-h"><h4>Receptor</h4><a href="#" style="font-size:13px;font-weight:600">Editar</a></div><div class="card-b">
+                <dl><dt>RFC</dt><dd class="mono">URE180429TM6</dd><dt>Nombre</dt><dd>UNIVERSIDAD ROBOTICA ESPAÑOLA</dd><dt>Régimen</dt><dd>601 · General de Ley PM</dd><dt>Uso CFDI</dt><dd>G01 · Adquisición de mercancías</dd><dt>C.P.</dt><dd class="mono">86991</dd></dl>
+              </div></div>
+            </div>
+            <div class="card"><div class="card-h"><h4>Conceptos</h4><span class="muted" style="font-size:12.5px">Desde la venta de ML</span></div>
+              <table>
+                <thead><tr><th>Descripción</th><th class="hide-m">Clave SAT</th><th class="n">Cant.</th><th class="n">Unitario</th><th class="n">Importe</th></tr></thead>
+                <tbody><tr><td><strong>Organizador de cubiertos</strong><br><span class="muted" style="font-size:12px">Pieza · Objeto de impuesto 02 · IVA 16 %</span></td><td class="mono hide-m">52151600</td><td class="n">1</td><td class="n mono">170.689655</td><td class="n">$170.69</td></tr></tbody>
+              </table>
+            </div>
+            <div class="card"><div class="card-h"><h4>Comprobante</h4></div><div class="card-b">
+              <dl><dt>Forma de pago</dt><dd>31 · Intermediario pagos</dd><dt>Método</dt><dd>PUE · Una sola exhibición</dd><dt>Moneda</dt><dd>MXN</dd><dt>Serie y folio</dt><dd class="mono">A-13</dd></dl>
+            </div></div>
+          </div>
+          <div class="card" style="position:sticky;top:12px"><div class="card-h"><h4>Resumen</h4><span class="env">Sandbox</span></div><div class="card-b">
+            <div class="sum"><div><span class="muted">Subtotal</span><span>$170.69</span></div><div><span class="muted">IVA trasladado 16 %</span><span>$27.31</span></div><div class="tot"><span>Total</span><span>$198.00</span></div></div>
+            <div class="callout ok" style="margin-top:14px"><span class="ic"></span><p><b>Cuadra al centavo</b> con el total de MercadoLibre.</p></div>
+            <div class="callout sb" style="margin-top:8px"><span class="ic"></span><p>Ambiente de pruebas: <b>sin validez fiscal</b>.</p></div>
+            <button class="btn pri" style="width:100%;margin-top:16px">Sellar y timbrar</button>
+            <button class="btn ghost" style="width:100%;margin-top:6px">Guardar borrador</button>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 5 CONFIRMAR PRODUCCIÓN ============ -->
+<section class="screen" id="s5">
+  <div class="screen-head"><b>5</b><h2>Confirmar timbrado en producción</h2><span>Solo Fase B, en cada factura · Requisito 6.2</span></div>
+  <div class="frame"><div class="modal-wrap">
+    <div class="modal">
+      <div class="mh"><span class="env prod">Producción</span><h3 style="font-size:19px;margin:12px 0 4px;letter-spacing:-.3px">¿Timbrar con validez fiscal?</h3><p class="muted" style="margin:0">Se usará un timbre de tu saldo. Una factura timbrada no se borra; solo se cancela.</p></div>
+      <div class="mb">
+        <div class="card" style="box-shadow:none"><div class="card-b"><dl><dt>Receptor</dt><dd>UNIVERSIDAD ROBOTICA ESPAÑOLA</dd><dt>RFC</dt><dd class="mono">URE180429TM6</dd><dt>Total</dt><dd style="font-size:16px">$198.00 MXN</dd><dt>Saldo</dt><dd>87 → <b>86 timbres</b></dd></dl></div></div>
+        <label class="field" style="margin-top:14px">Contraseña del CSD<input type="password" value="••••••••••"></label>
+        <p class="muted" style="font-size:12px;margin:6px 0 0">🔒 Se usa solo en este navegador. Nunca se envía.</p>
+      </div>
+      <div class="mf"><button class="btn">Cancelar</button><button class="btn danger">Timbrar en producción</button></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 6 FACTURA LISTA ============ -->
+<section class="screen" id="s6">
+  <div class="screen-head"><b>6</b><h2>Factura lista</h2><span>Guardar primero, luego entregar · Requisito 7</span></div>
+  <div class="frame"><div class="shell">
+    <aside class="side">
+      <div class="brandmark"><i>F</i>Facturalow</div>
+      <a class="nav" href="#">Panel</a><a class="nav on" href="#">Nueva factura</a><a class="nav" href="#">Emitidas<span class="ct">15</span></a><a class="nav" href="#">Clientes</a>
+      <div class="nav-l">Integraciones</div><a class="nav" href="#">MercadoLibre</a><a class="nav" href="#">PAC</a>
+      <div class="nav-l">Cuenta</div><a class="nav" href="#">Emisor y CSD</a><a class="nav" href="#">Timbres y plan</a>
+      <span class="sp"></span><div class="org"><span class="av">EK</span><div>Escuela Kemper Urgate<small>EKU9003173C9</small></div></div>
+    </aside>
+    <div class="main">
+      <div class="topbar"><span class="crumb">Facturas / <b>A-13</b></span><span class="sp"></span><span class="env">Sandbox</span><span class="avatar">RM</span></div>
+      <div class="content">
+        <div class="stepper"><span class="st done"><b>✓</b>Origen</span><span class="st-line done"></span><span class="st done"><b>✓</b>Revisar</span><span class="st-line done"></span><span class="st done"><b>✓</b>Timbrar</span><span class="st-line done"></span><span class="st cur"><b>4</b>Entregar</span></div>
+        <div class="ph"><div><h3>Factura A-13 timbrada</h3><p class="mono">UUID 6F1C2A3B-9D4E-4F10-8A7B-2C5D6E7F8A90</p></div><div style="display:flex;gap:8px"><button class="btn">Facturar otra</button><button class="btn pri">Descargar XML + PDF</button></div></div>
+        <div class="g2">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div class="card"><div class="card-h"><h4>Progreso</h4></div><div class="card-b"><div class="timeline">
+              <div class="tl"><b>✓</b><div>Sellada en tu navegador<small>12:41:03 · RSA-SHA256</small></div></div>
+              <div class="tl"><b>✓</b><div>Timbrada por el PAC<small>12:41:04 · sandbox</small></div></div>
+              <div class="tl"><b>✓</b><div>Guardada en este equipo<small>XML y PDF</small></div></div>
+              <div class="tl pend"><b>–</b><div>Subida a la venta en MercadoLibre<small>No aplica en la demo</small></div></div>
+            </div></div></div>
+            <div class="card"><div class="card-h"><h4>XML timbrado</h4><a href="#" style="font-size:13px;font-weight:600">Copiar</a></div><div class="card-b" style="padding:12px">
+<pre class="code"><span class="k">&lt;cfdi:Comprobante</span> <span class="a">Version</span>=<span class="s">"4.0"</span> <span class="a">Serie</span>=<span class="s">"A"</span> <span class="a">Folio</span>=<span class="s">"13"</span>
+  <span class="a">SubTotal</span>=<span class="s">"170.69"</span> <span class="a">Total</span>=<span class="s">"198.00"</span> <span class="a">Moneda</span>=<span class="s">"MXN"</span>
+  <span class="a">FormaPago</span>=<span class="s">"31"</span> <span class="a">MetodoPago</span>=<span class="s">"PUE"</span>
+  <span class="a">NoCertificado</span>=<span class="s">"30001000000500003416"</span> <span class="a">Sello</span>=<span class="s">"Hq3k…"</span><span class="k">&gt;</span>
+  <span class="k">&lt;cfdi:Emisor</span> <span class="a">Rfc</span>=<span class="s">"EKU9003173C9"</span> <span class="a">RegimenFiscal</span>=<span class="s">"625"</span><span class="k">/&gt;</span>
+  <span class="k">&lt;cfdi:Receptor</span> <span class="a">Rfc</span>=<span class="s">"URE180429TM6"</span> <span class="a">UsoCFDI</span>=<span class="s">"G01"</span><span class="k">/&gt;</span>
+  …
+  <span class="k">&lt;tfd:TimbreFiscalDigital</span> <span class="a">UUID</span>=<span class="s">"6F1C2A3B-…"</span><span class="k">/&gt;</span>
+<span class="k">&lt;/cfdi:Comprobante&gt;</span></pre>
+            </div></div>
+          </div>
+          <div class="pdf">
+            <div class="wm">SIN VALIDEZ · SANDBOX</div>
+            <div class="hd"><div><b style="font-size:14px">ESCUELA KEMPER URGATE</b><br>RFC EKU9003173C9 · Régimen 625<br>C.P. 42501</div><div style="text-align:right"><b style="color:#4f46e5;font-size:14px">FACTURA A-13</b><br>23-oct-2026 12:41<br>Ingreso · CFDI 4.0</div></div>
+            <b>Receptor</b><br>UNIVERSIDAD ROBOTICA ESPAÑOLA · RFC URE180429TM6<br>Régimen 601 · Uso G01 · C.P. 86991
+            <table style="margin:12px 0"><tr><th>Concepto</th><th class="n">Cant.</th><th class="n">Importe</th></tr><tr><td>Organizador de cubiertos</td><td class="n">1</td><td class="n">170.69</td></tr></table>
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-end">
+              <div class="qr"></div>
+              <div style="min-width:150px"><div style="display:flex;justify-content:space-between"><span>Subtotal</span><span>170.69</span></div><div style="display:flex;justify-content:space-between"><span>IVA 16 %</span><span>27.31</span></div><div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;border-top:1px solid #e2e8f0;margin-top:4px;padding-top:4px"><span>Total</span><span>$198.00</span></div></div>
+            </div>
+            <p style="font-size:9.5px;color:#64748b;margin:12px 0 0;word-break:break-all">Folio fiscal 6F1C2A3B-9D4E-4F10-8A7B-2C5D6E7F8A90 · Sello digital del CFDI: Hq3k… · Sello del SAT: Zp9w… · Cadena original del complemento de certificación digital del SAT: ||1.1|6F1C2A3B…||</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 7 EMITIDAS ============ -->
+<section class="screen" id="s7">
+  <div class="screen-head"><b>7</b><h2>Facturas emitidas</h2><span>Estado por paso, respaldo y reintentos · Requisitos 7.4, 7.5</span></div>
+  <div class="frame"><div class="shell">
+    <aside class="side">
+      <div class="brandmark"><i>F</i>Facturalow</div>
+      <a class="nav" href="#">Panel</a><a class="nav" href="#">Nueva factura</a><a class="nav on" href="#">Emitidas<span class="ct">15</span></a><a class="nav" href="#">Clientes</a>
+      <div class="nav-l">Integraciones</div><a class="nav" href="#">MercadoLibre</a><a class="nav" href="#">PAC</a>
+      <div class="nav-l">Cuenta</div><a class="nav" href="#">Emisor y CSD</a><a class="nav" href="#">Timbres y plan</a>
+      <span class="sp"></span><div class="org"><span class="av">EK</span><div>Escuela Kemper Urgate<small>EKU9003173C9</small></div></div>
+    </aside>
+    <div class="main">
+      <div class="topbar"><span class="crumb"><b>Emitidas</b></span><span class="sp"></span><div class="searchbox">⌕ Buscar por RFC, folio o UUID<kbd>⌘K</kbd></div><span class="env">Sandbox</span><span class="avatar">RM</span></div>
+      <div class="content">
+        <div class="ph"><div><h3>Facturas emitidas</h3><p>Guardadas en este equipo. Exporta un respaldo con frecuencia.</p></div><button class="btn">⇩ Exportar respaldo (.zip)</button></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><div class="seg"><span class="on">Todas · 15</span><span>Sin subir · 1</span><span>Canceladas · 0</span></div><span class="sp" style="flex:1"></span><span class="badge">Octubre 2026 ▾</span><span class="badge">Sandbox ▾</span></div>
+        <div class="card">
+          <table>
+            <thead><tr><th>Folio</th><th class="hide-m">Fecha</th><th>Receptor</th><th class="hide-m">UUID</th><th class="n">Total</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td><strong>A-13</strong></td><td class="hide-m muted">23 oct · 12:41</td><td>UNIVERSIDAD ROBOTICA ESPAÑOLA<br><span class="mono muted">URE180429TM6</span></td><td class="mono hide-m muted">6F1C2A3B…</td><td class="n">$198.00</td><td><span class="badge sb">Sandbox</span></td></tr>
+              <tr><td><strong>A-12</strong></td><td class="hide-m muted">23 oct · 12:30</td><td>UNIVERSIDAD ROBOTICA ESPAÑOLA<br><span class="mono muted">URE180429TM6</span></td><td class="mono hide-m muted">A81D44E0…</td><td class="n">$188.10</td><td><span class="badge warn">Sin subir a ML</span> <a href="#" style="font-size:12.5px;font-weight:600;margin-left:4px">Reintentar</a></td></tr>
+              <tr><td><strong>A-11</strong></td><td class="hide-m muted">22 oct · 18:05</td><td>PÚBLICO EN GENERAL<br><span class="mono muted">XAXX010101000</span></td><td class="mono hide-m muted">0C7E9B12…</td><td class="n">$356.00</td><td><span class="badge ok">Entregada</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 8 EMISOR Y CSD ============ -->
+<section class="screen" id="s8">
+  <div class="screen-head"><b>8</b><h2>Emisor y CSD</h2><span>Multi-emisor; el CSD se lee y se guarda cifrado solo en el navegador · Requisitos 2, 9</span></div>
+  <div class="frame"><div class="shell">
+    <aside class="side">
+      <div class="brandmark"><i>F</i>Facturalow</div>
+      <a class="nav" href="#">Panel</a><a class="nav" href="#">Nueva factura</a><a class="nav" href="#">Emitidas<span class="ct">15</span></a><a class="nav" href="#">Clientes</a>
+      <div class="nav-l">Integraciones</div><a class="nav" href="#">MercadoLibre</a><a class="nav" href="#">PAC</a>
+      <div class="nav-l">Cuenta</div><a class="nav on" href="#">Emisor y CSD</a><a class="nav" href="#">Timbres y plan</a>
+      <span class="sp"></span><div class="org"><span class="av">EK</span><div>Escuela Kemper Urgate<small>EKU9003173C9</small></div></div>
+    </aside>
+    <div class="main">
+      <div class="topbar"><span class="crumb">Cuenta / <b>Emisor y CSD</b></span><span class="sp"></span><span class="env">Sandbox</span><span class="avatar">RM</span></div>
+      <div class="content">
+        <div class="ph"><div><h3>Emisor</h3><p>Cada emisor tiene su CSD, sus folios y su contador de timbres.</p></div><div class="seg"><span class="on">Escuela Kemper Urgate</span><span>+ Agregar emisor</span></div></div>
+        <div class="g2">
+          <div class="card"><div class="card-h"><h4>Datos fiscales</h4></div><div class="card-b" style="display:grid;gap:12px">
+            <label class="field">RFC<input class="mono" value="EKU9003173C9"></label>
+            <label class="field">Nombre (como en la constancia)<input value="ESCUELA KEMPER URGATE"></label>
+            <div class="g2" style="gap:12px"><label class="field">Régimen fiscal<select><option>625 · Plataformas tecnológicas</option></select></label><label class="field">C.P. de expedición<input value="42501"></label></div>
+            <div class="g2" style="gap:12px"><label class="field">Serie<input value="A"></label><label class="field">Siguiente folio<input value="14"></label></div>
+          </div></div>
+          <div class="card"><div class="card-h"><h4>Certificado de sello digital</h4><span class="badge ok">Vigente</span></div><div class="card-b">
+            <div class="drop"><strong>Arrastra tu .cer y tu .key</strong>Se leen en este navegador. Nunca se suben a ningún servidor.</div>
+            <dl style="margin-top:16px"><dt>No. certificado</dt><dd class="mono">30001000000500003416</dd><dt>RFC del CSD</dt><dd class="mono">EKU9003173C9 <span class="badge ok">Coincide</span></dd><dt>Vigencia</dt><dd>hasta 19 may 2027</dd></dl>
+            <div style="margin-top:12px">
+              <div class="toggle"><span>Recordar en este equipo<br><span class="muted" style="font-size:12px">Cifrado; pediré la contraseña en cada sesión.</span></span><span class="sw"></span></div>
+              <div class="toggle"><span>Ambiente de producción<br><span class="muted" style="font-size:12px">Disponible en la Fase B.</span></span><span class="sw off"></span></div>
+            </div>
+            <div class="callout warn" style="margin-top:12px"><span class="ic"></span><p><b>Nunca te pediremos tu e.firma.</b> Solo el CSD.</p></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 9 ERRORES ============ -->
+<section class="screen" id="s9">
+  <div class="screen-head"><b>9</b><h2>Errores en lenguaje simple</h2><span>Con acción sugerida; el borrador nunca se pierde · Requisitos 2.4, 3.6, 4.3, 6.4, 10.5</span></div>
+  <div class="frame"><div class="main"><div class="content">
+    <div class="callout bad"><span class="ic"></span><p><b>El total no cuadra.</b> La factura suma $198.01 y la venta en ML es $198.00. El valor unitario debe llevar 6 decimales. No se puede timbrar así.</p></div>
+    <div class="callout bad"><span class="ic"></span><p><b>El PAC rechazó la factura (CFDI40147).</b> El régimen 601 del receptor no admite el uso CFDI D01. Cambia el uso CFDI o el régimen. <a href="#">Detalle técnico</a></p></div>
+    <div class="callout warn"><span class="ic"></span><p><b>El comprador no pidió factura nominativa</b> (RFC XAXX010101000). Si te mandó su constancia, captura sus datos en «Receptor».</p></div>
+    <div class="callout warn"><span class="ic"></span><p><b>Esta venta ya tiene una factura en MercadoLibre.</b> Timbrar otra podría duplicarla. <a href="#">Ver la existente</a></p></div>
+    <div class="callout sb"><span class="ic"></span><p><b>El PAC no respondió.</b> Tu borrador está guardado y reintentar es seguro: no se timbrará dos veces. <button class="btn sm" style="margin-left:6px">Reintentar</button></p></div>
+    <div class="callout bad"><span class="ic"></span><p><b>Contraseña del CSD incorrecta.</b> Es la del CSD, no la de tu e.firma ni la del portal del SAT.</p></div>
+  </div></div></div>
+</section>
+
+<!-- ============ 10 TELÉFONO ============ -->
+<section class="screen" id="s10">
+  <div class="screen-head"><b>10</b><h2>En el teléfono</h2><span>Una columna, menú inferior y acción principal abajo · Requisito 10.4</span></div>
+  <div class="phone">
+    <div class="pt"><div class="brandmark" style="color:var(--ink);padding:0;font-size:15px"><i style="width:24px;height:24px;font-size:12px">F</i>Facturalow</div><span class="env">Sandbox</span></div>
+    <div class="pc">
+      <div class="stepper" style="font-size:12px"><span class="st done"><b>✓</b></span><span class="st-line done" style="width:24px"></span><span class="st cur"><b>2</b>Revisar</span><span class="st-line" style="width:24px"></span><span class="st"><b>3</b></span><span class="st-line" style="width:24px"></span><span class="st"><b>4</b></span></div>
+      <div><span class="muted" style="font-size:12px">Venta #…3210</span><h3 style="margin:2px 0 0;font-size:19px">Organizador de cubiertos</h3></div>
+      <div class="card"><div class="card-h"><h4>Receptor</h4><a href="#" style="font-size:13px;font-weight:600">Editar</a></div><div class="card-b"><dl style="grid-template-columns:70px 1fr"><dt>RFC</dt><dd class="mono">URE180429TM6</dd><dt>Uso</dt><dd>G01</dd></dl></div></div>
+      <div class="card"><div class="card-b"><div class="sum"><div><span class="muted">Subtotal</span><span>$170.69</span></div><div><span class="muted">IVA 16 %</span><span>$27.31</span></div><div class="tot"><span>Total</span><span>$198.00</span></div></div>
+        <div class="callout ok" style="margin-top:12px"><span class="ic"></span><p>Cuadra con ML</p></div></div></div>
+      <button class="btn pri" style="width:100%;padding:13px">Sellar y timbrar</button>
+    </div>
+    <div class="pb"><span>▦<br>Panel</span><span class="on">＋<br>Facturar</span><span>≡<br>Emitidas</span><span>⚙<br>Cuenta</span></div>
+  </div>
+</section>
+
+<footer>Mockups de la Fase A · datos de prueba publicados por el SAT · la clave SAT 52151600 es provisional hasta confirmarla.</footer>
+</body>
+</html>

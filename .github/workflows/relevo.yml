@@ -1,0 +1,30 @@
+# Despliega el relevo en Cloudflare Workers. El entorno «relevo» debe pedir aprobación manual.
+# Secretos del PAC: `wrangler secret put SW_USUARIO_SANDBOX` (nunca en el repo).
+name: Desplegar relevo
+
+on:
+  push:
+    branches: [main]
+    paths: ['apps/relevo/**', 'packages/pac/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    environment: relevo
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --test "apps/relevo/test/*.test.js" "packages/pac/test/*.test.js"
+      - name: Desplegar
+        working-directory: apps/relevo
+        run: npx --yes wrangler@4.149.0 deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

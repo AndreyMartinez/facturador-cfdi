@@ -1,0 +1,32 @@
+{
+  "nota": "Las dos ventas de docs/03-referencia-facturas-manuales.md con receptores de prueba del SAT. Sin datos reales.",
+  "emisor": {
+    "esquema": 1,
+    "id": "em_demo",
+    "rfc": "EKU9003173C9",
+    "nombre": "ESCUELA KEMPER URGATE",
+    "regimenFiscal": "601",
+    "lugarExpedicion": "42501",
+    "comprobante": { "formaPago": "31", "metodoPago": "PUE", "moneda": "MXN" },
+    "conceptoPorDefecto": { "claveProdServ": "52151600", "claveUnidad": "H87", "unidad": "Pieza", "objetoImp": "02" },
+    "ambientes": ["sandbox"]
+  },
+  "ventas": [
+    {
+      "fuente": "ejemplo",
+      "id": "referencia-198",
+      "fecha": "2026-10-18T12:00:00-06:00",
+      "total": "198.00",
+      "conceptos": [{ "descripcion": "Organizador de cubiertos", "cantidad": 1, "total": "198.00" }],
+      "receptor": { "rfc": "URE180429TM6", "nombre": "UNIVERSIDAD ROBOTICA ESPAÑOLA S.A. DE C.V. ", "regimenFiscal": "601", "usoCfdi": "G01", "codigoPostal": "65000" }
+    },
+    {
+      "fuente": "ejemplo",
+      "id": "referencia-188",
+      "fecha": "2026-10-20T12:00:00-06:00",
+      "total": "188.10",
+      "conceptos": [{ "descripcion": "Organizador de cubiertos", "cantidad": 1, "total": "188.10" }],
+      "receptor": { "rfc": "URE180429TM6", "nombre": "UNIVERSIDAD ROBOTICA ESPAÑOLA", "regimenFiscal": "601", "usoCfdi": "G03", "codigoPostal": "65000" }
+    }
+  ]
+}

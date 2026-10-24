@@ -1,0 +1,11 @@
+{
+  "name": "@facturador/almacen",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Almacén de emisores, facturas, CSD, folios y contadores. Motores: memoria e IndexedDB (después: servidor).",
+  "license": "AGPL-3.0-only",
+  "exports": {
+    ".": "./src/index.js"
+  }
+}
