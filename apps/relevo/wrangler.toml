@@ -1,0 +1,20 @@
+# Relevo del facturador. Secretos con `wrangler secret put` (nunca aquí):
+#   SW_USUARIO_SANDBOX, SW_CONTRASENA_SANDBOX
+name = "facturador-relevo"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+ORIGENES_PERMITIDOS = "https://andreymartinez.github.io,http://localhost:5173,http://localhost:4173"
+PRODUCCION_HABILITADA = "no"
+TOPE_DIARIO_SANDBOX = "300"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "facturador-relevo"
+database_id = "PENDIENTE"
+
+[[ratelimits]]
+name = "LIMITADOR"
+namespace_id = "1001"
+simple = { limit = 5, period = 60 }

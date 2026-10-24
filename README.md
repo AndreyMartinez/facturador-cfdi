@@ -1,54 +1,91 @@
 # facturador-cfdi
 
-Aplicación sencilla en **Node** para facturar (CFDI 4.0) las ventas de
-MercadoLibre de Savia Raíz:
+Facturación CFDI 4.0 **low cost**: el XML se arma y se **sella en el navegador**
+(el CSD nunca sale del equipo) y se timbra **directo con un PAC**. Empieza como
+prueba gratuita en GitHub Pages para las ventas de MercadoLibre de Savia Raíz y
+está estructurado para crecer a una plataforma multi-cliente.
 
-1. lee la venta y los datos fiscales que dejó el comprador,
-2. arma el XML y lo sella con el CSD,
-3. lo timbra **directo con un PAC**,
-4. genera el PDF,
-5. sube XML y PDF a la venta en MercadoLibre.
+```
+Venta ──► borrador (cuadra al centavo) ──► XML CFDI 4.0 ──► sello (navegador) ──► relevo ──► PAC ──► PDF con QR
+```
 
-Estado: **estructura y documentación**, sin código todavía.
+Estado: **Fase A (demo)** funcionando: venta de ejemplo o captura manual →
+revisar → sellar con el CSD de prueba del SAT → timbre (simulado o sandbox del
+PAC) → PDF → guardado en el equipo. Ver
+[docs/specs/plataforma-low-cost/](docs/specs/plataforma-low-cost/).
 
-## Documentación
+## Probarlo
 
-- [docs/01-como-se-factura.md](docs/01-como-se-factura.md): cómo funciona el
-  timbrado, requisitos (CSD, PAC, sandbox), datos fiscales fijos, opciones de
-  PAC, plan por fases.
-- [docs/02-arquitectura.md](docs/02-arquitectura.md): stack Node, módulos,
-  flujo de datos, configuración y secretos.
-- [docs/03-referencia-facturas-manuales.md](docs/03-referencia-facturas-manuales.md):
-  las dos facturas hechas a mano el 23-oct, para usarlas como casos de prueba.
+Requiere Node 24, y `xsltproc` y `xmllint` para las pruebas de oro (vienen en
+macOS).
+
+```bash
+npm install
+```
+
+```bash
+npm run fixtures
+```
+
+```bash
+npm test
+```
+
+```bash
+npm run dev -w @facturador/web
+```
+
+`npm run fixtures` descarga **fuera del repo** (en `~/.cache/facturador/`) el
+CSD público de prueba del SAT, la XSLT de la cadena original y los XSD del
+CFDI 4.0, verificados con SHA-256.
+
+Sin `VITE_RELEVO_URL` la demo usa un **PAC simulado** (marca el timbre como
+«SIMULADO, SIN VALIDEZ»). Con la URL del relevo, timbra en el sandbox del PAC.
 
 ## Estructura
 
 ```
-src/
-  ml/       API de MercadoLibre: ventas, datos fiscales, subir factura
-  cfdi/     Borrador → XML CFDI 4.0, cálculo de importes y cadena original
-  sello/    CSD: leer .cer/.key, firmar
-  pac/      Cliente del PAC: timbrar y cancelar (sandbox y producción)
-  pdf/      Representación impresa con QR
-  web/      Servidor local y pantalla
-docs/       Documentación
-test/       Pruebas (node:test)
+packages/
+  nucleo/              importes, receptor, borrador, XML, cadena original, sello, QR (puro: sin DOM, fs ni red)
+  firmador-webcrypto/  abre el CSD y firma en el navegador (node-forge + WebCrypto)
+  firmador-node/       el mismo contrato con node:crypto (pruebas y servidor futuro)
+  almacen/             emisores, facturas, folios y contadores (memoria / IndexedDB)
+  fuentes/             de dónde salen las ventas: ejemplo, captura manual (MercadoLibre en la Fase B)
+  pac/                 cliente del relevo, adaptador de SW Sapien, PAC simulado
+  pdf/                 representación impresa con QR del SAT
+apps/
+  web/                 sitio estático (Vite + Preact) → GitHub Pages
+  relevo/              Cloudflare Worker sin estado: habla con el PAC
+fixtures/ventas/       las dos ventas de referencia, con RFC de prueba
+scripts/               descarga de recursos de prueba y revisión de secretos
+docs/                  documentación y specs
 ```
 
-Cada carpeta tiene su README con qué hace y qué falta.
+Cada paquete tiene su README.
 
-## Requisitos
+## Documentación
 
-- Node 24 o superior.
-- CSD de Savia Raíz (se tramita en CertiSAT Web con la e.firma).
-- Cuenta en el sandbox del PAC elegido.
-- Token de MercadoLibre (hoy vive en `~/.catalogo3d/`).
+- [docs/01-como-se-factura.md](docs/01-como-se-factura.md): cómo funciona el
+  timbrado, PAC, CSD y datos fiscales.
+- [docs/02-arquitectura.md](docs/02-arquitectura.md): arquitectura, dependencias
+  y dónde viven los secretos.
+- [docs/03-referencia-facturas-manuales.md](docs/03-referencia-facturas-manuales.md):
+  las dos facturas de referencia (casos de prueba).
+- [docs/specs/plataforma-low-cost/](docs/specs/plataforma-low-cost/):
+  requisitos, diseño, tareas y mockups.
 
 ## Lo que nunca va en este repo
 
-- CSD (`.cer`, `.key`), su contraseña ni la e.firma.
-- Tokens de MercadoLibre o del PAC.
+- CSD reales (`.cer`, `.key`), su contraseña ni la e.firma.
+- Credenciales del PAC, tokens de MercadoLibre o de Cloudflare.
 - XML/PDF timbrados y datos fiscales de clientes.
 
-Todo eso vive en `~/.facturador/` (permisos 600). Ver
-[docs/02-arquitectura.md](docs/02-arquitectura.md#configuración-y-secretos).
+`npm run secretos` (y la CI) falla si encuentra certificados, llaves o RFC que
+no sean de prueba.
+
+## Licencia
+
+[AGPL-3.0](LICENSE). Puedes usar, estudiar y modificar este código; si lo
+ofreces como servicio a otros, debes publicar tus cambios bajo la misma
+licencia. Para otros términos de uso (licencia comercial), contacta al titular.
+Antes de contribuir, lee [CONTRIBUTING.md](CONTRIBUTING.md).

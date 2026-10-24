@@ -1,0 +1,16 @@
+{
+  "name": "@facturador/pac",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "PAC: cliente del relevo (navegador) y adaptador de SW Sapien (lo usa el relevo).",
+  "license": "AGPL-3.0-only",
+  "exports": {
+    ".": "./src/index.js",
+    "./sw-sapien": "./src/sw-sapien.js",
+    "./relevo": "./src/relevo.js"
+  },
+  "dependencies": {
+    "@facturador/nucleo": "*"
+  }
+}

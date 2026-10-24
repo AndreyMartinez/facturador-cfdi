@@ -1,0 +1,14 @@
+{
+  "name": "@facturador/firmador-node",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Firmador con node:crypto: abre el CSD del SAT y firma RSA-SHA256. Para pruebas y servidor.",
+  "license": "AGPL-3.0-only",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "dependencies": {
+    "@facturador/nucleo": "*"
+  }
+}

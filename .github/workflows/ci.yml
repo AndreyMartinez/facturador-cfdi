@@ -1,0 +1,37 @@
+# Pruebas, tipos, revisión de secretos y build en cada cambio.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - name: Herramientas del SAT para las pruebas de oro (xsltproc, xmllint)
+        run: sudo apt-get update && sudo apt-get install -y xsltproc libxml2-utils
+      - name: Recursos públicos de prueba en caché (CSD de prueba, XSLT y XSD del SAT)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/facturador
+          key: fixtures-${{ hashFiles('scripts/fixtures.js') }}
+      - run: npm ci
+      - run: npm run fixtures
+      - name: Revisión de secretos
+        run: npm run secretos
+      - name: Tipos (JSDoc + tsc)
+        run: npm run check
+      - name: Pruebas
+        run: npm test
+      - name: Build del sitio
+        run: npm run build -w @facturador/web

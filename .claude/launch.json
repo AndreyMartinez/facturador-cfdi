@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "web", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev", "-w", "@facturador/web", "--", "--port", "5173", "--strictPort"], "port": 5173 },
+    { "name": "web-build", "runtimeExecutable": "npm", "runtimeArgs": ["run", "preview", "-w", "@facturador/web", "--", "--port", "4173", "--strictPort"], "port": 4173 }
+  ]
+}

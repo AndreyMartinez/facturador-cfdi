@@ -1,0 +1,27 @@
+{
+  "name": "facturador-cfdi",
+  "private": true,
+  "type": "module",
+  "description": "Facturación CFDI 4.0 low cost: sellado en el navegador, timbrado directo con el PAC.",
+  "license": "AGPL-3.0-only",
+  "engines": {
+    "node": ">=24"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "node --test \"packages/*/test/*.test.js\" \"apps/*/test/*.test.js\" \"scripts/test/*.test.js\"",
+    "check": "tsc -p tsconfig.json",
+    "fixtures": "node scripts/fixtures.js",
+    "secretos": "node scripts/revisar-secretos.js ."
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/node-forge": "^1.3.14",
+    "@types/qrcode": "^1.5.6",
+    "fake-indexeddb": "^6.2.5",
+    "typescript": "^5.9.3"
+  }
+}

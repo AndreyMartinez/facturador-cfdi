@@ -6,3 +6,6 @@
 .env
 node_modules/
 secretos/
+dist/
+.wrangler/
+.cache/

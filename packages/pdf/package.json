@@ -1,0 +1,16 @@
+{
+  "name": "@facturador/pdf",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Representación impresa del CFDI timbrado con QR del SAT (jsPDF + qrcode).",
+  "license": "AGPL-3.0-only",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "dependencies": {
+    "@facturador/nucleo": "*",
+    "jspdf": "4.2.1",
+    "qrcode": "1.5.4"
+  }
+}

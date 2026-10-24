@@ -1,0 +1,12 @@
+{
+  "name": "@facturador/nucleo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Núcleo de facturación CFDI 4.0: importes, borrador, XML, cadena original y sello. Sin DOM, sin fs, sin red.",
+  "license": "AGPL-3.0-only",
+  "exports": {
+    ".": "./src/index.js",
+    "./*": "./src/*.js"
+  }
+}

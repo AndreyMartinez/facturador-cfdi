@@ -1,0 +1,14 @@
+{
+  "name": "@facturador/fuentes",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Fuentes de ventas: ejemplo (demo), captura manual y, en la Fase B, MercadoLibre.",
+  "license": "AGPL-3.0-only",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "dependencies": {
+    "@facturador/nucleo": "*"
+  }
+}

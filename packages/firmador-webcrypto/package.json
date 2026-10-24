@@ -1,0 +1,15 @@
+{
+  "name": "@facturador/firmador-webcrypto",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Firmador para navegador: node-forge descifra la .key del SAT y WebCrypto firma con una llave no exportable.",
+  "license": "AGPL-3.0-only",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "dependencies": {
+    "@facturador/nucleo": "*",
+    "node-forge": "1.4.0"
+  }
+}
